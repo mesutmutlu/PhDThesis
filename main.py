@@ -7,6 +7,8 @@ import wbgapi as wb
 import pandas as pd
 import openpyxl
 import numpy as np
+from datetime import datetime
+
 
 
 def print_hi(name):
@@ -49,13 +51,14 @@ if __name__ == '__main__':
     for db_id in ind_lb['db_id'].unique():
         wb.db = db_id.astype(int)
         try:
+            print(datetime.now(), ' : ', str(db_id))
             ind_l = ind_lb[ind_lb['db_id'] == db_id]['Unnamed: 0'].to_list()
             a = wb.data.DataFrame(ind_l, time=range(2000, 2022), skipBlanks=True,
                         columns='series').reset_index()
             a.to_excel(str(wb.db)+'.xlsx')
-            print('success db_id: ', str(db_id))
+            print(datetime.now(), ' success db_id: ', str(db_id))
         except:
-            print('error db_id: ', str(db_id))
+            print(datetime.now(), ' error db_id: ', str(db_id))
 
 
 
